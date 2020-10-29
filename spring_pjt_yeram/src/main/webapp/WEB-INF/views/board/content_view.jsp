@@ -38,7 +38,7 @@
 					&nbsp;&nbsp;
 					<a href="delete?bId=${content_view.bId }">삭제</a>
 					&nbsp;&nbsp;
-					<a href="reply?bId=${content_view.bId }">답변</a>
+					<a href="reply_view?bId=${content_view.bId }">답변</a>
 			</tr>
 		</table>
 	</form>

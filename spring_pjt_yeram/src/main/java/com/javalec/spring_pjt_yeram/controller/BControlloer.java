@@ -2,6 +2,8 @@ package com.javalec.spring_pjt_yeram.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import com.javalec.spring_pjt_yeram.board_command.BModifyCommand;
 import com.javalec.spring_pjt_yeram.board_command.BReplyCommand;
 import com.javalec.spring_pjt_yeram.board_command.BReplyViewCommand;
 import com.javalec.spring_pjt_yeram.board_command.BWriteCommand;
+import com.javalec.spring_pjt_yeram.util.Constant;
 
 
 // 게시판 처리하는 컨트롤러
@@ -23,6 +26,15 @@ public class BControlloer {
 	
 	BCommand command;
 	
+	public JdbcTemplate template;
+	
+	@Autowired
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+		Constant.template = this.template;
+	}
+	
+
 	@RequestMapping("board/list")
 	public String list(Model model) {
 		
@@ -99,7 +111,7 @@ public class BControlloer {
 		command = new BReplyCommand();
 		command.execute(model);
 		
-		return "redirect:board/list";
+		return "redirect:list";
 	}
 	
 	@RequestMapping("/board/delete")
@@ -111,7 +123,7 @@ public class BControlloer {
 		command = new BDeleteCommand();
 		command.execute(model);
 		
-		return "redirect:board/list";
+		return "redirect:list";
 	}
 	
 	

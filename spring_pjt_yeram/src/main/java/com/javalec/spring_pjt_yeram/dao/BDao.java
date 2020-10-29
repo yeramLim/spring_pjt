@@ -2,240 +2,147 @@ package com.javalec.spring_pjt_yeram.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementSetter;
+
 import com.javalec.spring_pjt_yeram.dto.BDto;
-import com.javalec.spring_pjt_yeram.util.Util;
+import com.javalec.spring_pjt_yeram.util.Constant;
 
-
-// DB에 접근
+// **************************************** DB에 접근
 public class BDao {
-	
+
 	DataSource dataSource;
-	
+	JdbcTemplate template = null;;
+
 	public BDao() {
-		try {
-			Context context = new InitialContext();
-			dataSource = (DataSource) context.lookup("java:comp/env/jdbc/oracle");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// 글 목록 조회
-	public ArrayList<BDto> list() {
-		ArrayList<BDto> dtos = new ArrayList<BDto>();
-		
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			connection = dataSource.getConnection();
-			String query = "select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from boardDB order by bGroup desc, bStep asc";
-			pstmt = connection.prepareStatement(query);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				int bId = rs.getInt("bId");
-				String bName = rs.getString("bName");
-				String bTitle = rs.getString("bTitle");
-				String bContent = rs.getString("bContent");
-				Timestamp bDate = rs.getTimestamp("bDate");
-				int bHit = rs.getInt("bHit");
-				int bGroup = rs.getInt("bGroup");
-				int bStep = rs.getInt("bStep");
-				int bIndent = rs.getInt("bIndent");
-				
-				BDto dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
-				dtos.add(dto);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(connection != null) {
-					connection.close();
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return dtos;
+		template = Constant.template;
 	}
 
-	// 글 작성
-	public void write(String bName, String bTitle, String bContent) {
-		
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			
-			connection = dataSource.getConnection();
-			String query = "insert into boardDB (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) VALUES (boardDB_seq.nextval, ?, ?, ?, 0, boardDB_seq.currval, 0, 0)";
-			pstmt = connection.prepareStatement(query);
-			
-			pstmt.setString(1, bName);
-			pstmt.setString(2, bTitle);
-			pstmt.setString(3, bContent);
-			
-			int re = pstmt.executeUpdate();
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(connection != null) {
-					connection.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+	// **************************************** 글 목록 조회
+	public ArrayList<BDto> list() {
+		String query = "select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from boardDB order by bGroup desc, bStep asc";
+		return (ArrayList<BDto>) template.query(query, new BeanPropertyRowMapper<BDto>(BDto.class));
 	}
-	
-	// 내용 조회
+
+	// **************************************** 글 작성
+	public void write(final String bName, final String bTitle, final String bContent) {
+		template.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				String query = "insert into boardDB (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) VALUES (boardDB_seq.nextval, ?, ?, ?, 0, boardDB_seq.currval, 0, 0)";
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setString(1, bName);
+				pstmt.setString(2, bTitle);
+				pstmt.setString(3, bContent);
+				
+				return pstmt;
+			}
+		});
+	}
+
+	// **************************************** 내용 조회
 	public BDto contentView(String strId) {
-		
 		// hit 값 올리는 로직
 		upHit(strId);
 		
-		BDto dto = null;
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			
-			connection = dataSource.getConnection();
-			String query = "select * from boardDB where bId = ?";
-			pstmt = connection.prepareStatement(query);
-			
-			pstmt.setInt(1, Integer.parseInt(strId));
-			
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				int bId = rs.getInt("bId");
-				String bName = rs.getString("bName");
-				String bTitle = rs.getString("bTitle");
-				String bContent = rs.getString("bContent");
-				Timestamp bDate = rs.getTimestamp("bDate");
-				int bHit = rs.getInt("bHit");
-				int bGroup = rs.getInt("bGroup");
-				int bStep = rs.getInt("bStep");
-				int bIndent = rs.getInt("bIndent");
-				
-				dto = new BDto(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
-				
-			}
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(connection != null) {
-					connection.close();
-				}
-				if(rs != null) {
-					rs.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		String query = "select * from boardDB where bId = " + strId;
+		return template.queryForObject(query, new BeanPropertyRowMapper<BDto>(BDto.class));
+	}
 
-		return dto;
-	}
-	
-	// 글 수정
-	public void modify(String bId, String bName, String bTitle, String bContent) {
-		Connection connection = null;
-		PreparedStatement pstmt = null;
+	// **************************************** 글 수정
+	public void modify(final String bId, final String bName, final String bTitle, final String bContent) {
 		
-		try {
-			connection = dataSource.getConnection();
-			String query = "update boardDB set bName = ?, bTitle = ?, bContent = ? where bId = ?";
-			pstmt = connection.prepareStatement(query);
+		String query = "update boardDB set bName = ?, bTitle = ?, bContent = ? where bId = ?";
+		template.update(query, new PreparedStatementSetter() {
 			
-			pstmt.setString(1, bName);
-			pstmt.setString(2, bTitle);
-			pstmt.setString(3, bContent);
-			pstmt.setInt(4, Integer.parseInt(bId));
-			
-			int re = pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(connection != null) {
-					connection.close();
-				}
-			}catch(Exception e) {
-				e.printStackTrace();
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, bName);
+				ps.setString(2, bTitle);
+				ps.setString(3, bContent);
+				ps.setInt(4, Integer.parseInt(bId));
 			}
-		}
+		});
 	}
-	
-	public void upHit(String bId) {
-		Connection connection = null;
-		PreparedStatement pstmt = null;
+
+	// **************************************** 글 삭제
+	public void delete(final String strId) {
+		String query = "delete from boardDB where bId = ?";
 		
-		try {
-			connection = dataSource.getConnection();
+		template.update(query, new PreparedStatementSetter() {
 			
-			String query = "update boardDB set bHit = bHit + 1 where bId = ?";
-			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, bId);
-			
-			int re = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(connection != null) {
-					connection.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, strId);
 			}
-			
-		}
+		});
 	}
+
 	
 	
+	public BDto reply_view(String strId) {
+		String query = "select * from boardDB where bId = " + strId;
+		return template.queryForObject(query, new BeanPropertyRowMapper<BDto>(BDto.class));
+	}
+
+	
+	
+	// **************************************** 답글 입력
+	public void reply(String bId, final String bName, final String bTitle, final String bContent, final String bGroup, final String bStep, final String bIndent) {
+
+		// 들여쓰기 되는 메소드
+		replyShape(bGroup, bStep);
+		
+		String query = "insert into boardDB (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) VALUES (boardDB_seq.nextval, ?, ?, ?, ?, ?, ?)";
+		template.update(query, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, bName);
+				ps.setString(2, bTitle);
+				ps.setString(3, bContent);
+				ps.setInt(4, Integer.parseInt(bGroup));
+				ps.setInt(5, Integer.parseInt(bStep) + 1);
+				ps.setInt(6, Integer.parseInt(bIndent) + 1);
+			}
+		});
+	}
+
+	// **************************************** 답글 들여쓰기 하는 메소드
+	private void replyShape(final String bGroup, final String bStep) {
+		
+		String query = "update boardDB set bStep = bStep + 1 where bGroup = ? and bStep > ?";
+		
+		template.update(query, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, Integer.parseInt(bGroup));
+				ps.setInt(2, Integer.parseInt(bStep));
+			}
+		});
+	}
+
+	// **************************************** 조회수 올리는 메소드
+	public void upHit(final String bId) {
+		
+		String query = "update boardDB set bHit = bHit + 1 where bId = ?";
+		
+		template.update(query, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, Integer.parseInt(bId));
+			}
+		});
+	}
+
 }
