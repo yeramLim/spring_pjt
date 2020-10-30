@@ -1,17 +1,15 @@
-package com.javalec.spring_pjt_yeram.model;
+package com.javalec.spring_pjt_yeram.dto;
 
-public class User {
-	
+public class UserDto {
 	private String userEmail;
 	private String userPassword;
 	private String userTel;
 	
 	
-	public User() {
+	public UserDto() {
 	}
 	
-	public User(String userEmail, String userPassword, String userTel) {
-		super();
+	public UserDto(String userEmail, String userPassword, String userTel) {
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
 		this.userTel = userTel;
@@ -36,6 +34,4 @@ public class User {
 	}
 	
 	
-	
-
 }

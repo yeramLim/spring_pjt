@@ -25,7 +25,7 @@
                     <input type="checkbox" class="checkbox"><span>Remember Password</span>
                     <button class="submit">Login</button>
                 </form>
-                <form method="post" id="register" action="/resist_ok" class="input-group">
+                <form method="post" id="register" action="${pageContext.request.contextPath}/member/resist_ok" class="input-group">
                     <input type="text" class="input-field" name="userEmail" placeholder="Email" required>
                     <input type="tel" class="input-field" name="userTel" placeholder="TEL" required>
                     <input type="password" class="input-field" name="userPassword" placeholder="Enter Password" required>

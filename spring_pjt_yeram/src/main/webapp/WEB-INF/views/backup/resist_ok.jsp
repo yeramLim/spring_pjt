@@ -8,5 +8,8 @@
 </head>
 <body>
 
+		resist.ok
+	id >> ${userEmail}
+
 </body>
 </html>

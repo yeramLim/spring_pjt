@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -31,15 +33,20 @@
         </div>
         <div class="col-md-3">
           <div class="login-box well">
-        <form accept-charset="UTF-8" role="form" method="post" action="">
+        <form accept-charset="UTF-8" role="form" method="post" action="${pageContext.request.contextPath}/member/login_ok">
             <legend>login</legend>
             <div class="form-group">
                 <label for="username-email">이메일</label>
-                <input name="user_id" value='' id="username-email" placeholder="E-mail" type="text" class="form-control" />
+                <input name="userEmail" value='' id="username-email" placeholder="E-mail" type="text" class="form-control" />
             </div>
             <div class="form-group">
-                <label for="password">비밀번호</label>
+                <label for="userPassword">비밀번호</label>
                 <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>
+                    <form:checkbox path="rememberId"/>아이디 기억
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-default btn-login-submit btn-block m-t-md" value="Login" />
