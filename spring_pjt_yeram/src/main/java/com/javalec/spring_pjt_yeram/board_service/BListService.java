@@ -1,4 +1,4 @@
-package com.javalec.spring_pjt_yeram.board_command;
+package com.javalec.spring_pjt_yeram.board_service;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import com.javalec.spring_pjt_yeram.dao.BDao;
 import com.javalec.spring_pjt_yeram.dto.BDto;
 
-public class BListCommand implements BCommand {
+public class BListService implements BService {
 
 	@Override
 	public void execute(Model model) {

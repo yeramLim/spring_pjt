@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.javalec.spring_pjt_yeram.board_command.BCommand;
-import com.javalec.spring_pjt_yeram.board_command.BContentCommand;
-import com.javalec.spring_pjt_yeram.board_command.BDeleteCommand;
-import com.javalec.spring_pjt_yeram.board_command.BListCommand;
-import com.javalec.spring_pjt_yeram.board_command.BModifyCommand;
-import com.javalec.spring_pjt_yeram.board_command.BReplyCommand;
-import com.javalec.spring_pjt_yeram.board_command.BReplyViewCommand;
-import com.javalec.spring_pjt_yeram.board_command.BWriteCommand;
+import com.javalec.spring_pjt_yeram.board_service.BService;
+import com.javalec.spring_pjt_yeram.board_service.BContentService;
+import com.javalec.spring_pjt_yeram.board_service.BDeleteService;
+import com.javalec.spring_pjt_yeram.board_service.BListService;
+import com.javalec.spring_pjt_yeram.board_service.BModifyService;
+import com.javalec.spring_pjt_yeram.board_service.BReplyService;
+import com.javalec.spring_pjt_yeram.board_service.BReplyViewService;
+import com.javalec.spring_pjt_yeram.board_service.BWriteService;
 import com.javalec.spring_pjt_yeram.util.Constant;
 
 
@@ -24,7 +24,7 @@ import com.javalec.spring_pjt_yeram.util.Constant;
 @Controller
 public class BControlloer {
 	
-	BCommand command;
+	BService command;
 	
 	public JdbcTemplate template;
 	
@@ -40,7 +40,7 @@ public class BControlloer {
 		
 		System.out.println(">>>>>>>list()");
 		
-		command = new BListCommand();
+		command = new BListService();
 		command.execute(model);
 		return "board/list";
 	}
@@ -63,7 +63,7 @@ public class BControlloer {
 		
 		model.addAttribute("request", httpServletRequest);
 		
-		command = new BWriteCommand();
+		command = new BWriteService();
 		command.execute(model);
 		
 		return "redirect:list";
@@ -74,7 +74,7 @@ public class BControlloer {
 		System.out.println(">>>>>>>content_view()");
 		
 		model.addAttribute("request", httpServletRequest);
-		command = new BContentCommand();
+		command = new BContentService();
 		command.execute(model);
 		
 		return "board/content_view";
@@ -85,7 +85,7 @@ public class BControlloer {
 		System.out.println(">>>>>>>modify()");
 		
 		model.addAttribute("request", httpServletRequest);
-		command = new BModifyCommand();
+		command = new BModifyService();
 		command.execute(model);
 		
 		return "redirect:list";
@@ -96,7 +96,7 @@ public class BControlloer {
 		System.out.println(">>>>>>>reply_view()");
 		
 		model.addAttribute("request", httpServletRequest);
-		command = new BReplyViewCommand();
+		command = new BReplyViewService();
 		command.execute(model);
 		
 		return "board/reply_view";
@@ -108,7 +108,7 @@ public class BControlloer {
 		
 		model.addAttribute("request", httpServletRequest);
 		
-		command = new BReplyCommand();
+		command = new BReplyService();
 		command.execute(model);
 		
 		return "redirect:list";
@@ -120,7 +120,7 @@ public class BControlloer {
 		
 		model.addAttribute("request", httpServletRequest);
 		
-		command = new BDeleteCommand();
+		command = new BDeleteService();
 		command.execute(model);
 		
 		return "redirect:list";

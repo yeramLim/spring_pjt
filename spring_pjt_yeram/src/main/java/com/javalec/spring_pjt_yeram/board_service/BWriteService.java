@@ -1,4 +1,4 @@
-package com.javalec.spring_pjt_yeram.board_command;
+package com.javalec.spring_pjt_yeram.board_service;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import com.javalec.spring_pjt_yeram.dao.BDao;
 
-public class BWriteCommand implements BCommand {
+public class BWriteService implements BService {
 
 	@Override
 	public void execute(Model model) {

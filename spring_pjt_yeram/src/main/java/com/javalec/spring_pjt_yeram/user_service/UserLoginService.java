@@ -1,4 +1,4 @@
-package com.javalec.spring_pjt_yeram.user_command;
+package com.javalec.spring_pjt_yeram.user_service;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import com.javalec.spring_pjt_yeram.dao.UserDao;
 
-public class UserLoginCommand implements UserCommand {
+public class UserLoginService implements UserService {
 
 	@Override
 	public void execute(Model model) {

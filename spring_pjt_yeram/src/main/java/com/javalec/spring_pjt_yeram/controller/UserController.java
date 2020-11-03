@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.javalec.spring_pjt_yeram.user_command.UserCommand;
-import com.javalec.spring_pjt_yeram.user_command.UserLoginCommand;
+import com.javalec.spring_pjt_yeram.user_service.UserService;
+import com.javalec.spring_pjt_yeram.user_service.UserLoginService;
 import com.javalec.spring_pjt_yeram.util.Constant;
 
 @Controller
 public class UserController {
 		
-	UserCommand command;
+	UserService command;
 	public JdbcTemplate template;
 	
 	@Autowired
@@ -42,7 +42,7 @@ public class UserController {
 		
 		model.addAttribute("request", httpServletRequest);
 		
-		command = new UserLoginCommand();
+		command = new UserLoginService();
 		command.execute(model);
 
 		return "redirect:../home";
