@@ -24,7 +24,7 @@ import com.javalec.spring_pjt_yeram.util.Constant;
 @Controller
 public class BControlloer {
 	
-	BService command;
+	BService service;
 	
 	public JdbcTemplate template;
 	
@@ -40,8 +40,8 @@ public class BControlloer {
 		
 		System.out.println(">>>>>>>list()");
 		
-		command = new BListService();
-		command.execute(model);
+		service = new BListService();
+		service.execute(model);
 		return "board/list";
 	}
 	
@@ -63,8 +63,8 @@ public class BControlloer {
 		
 		model.addAttribute("request", httpServletRequest);
 		
-		command = new BWriteService();
-		command.execute(model);
+		service = new BWriteService();
+		service.execute(model);
 		
 		return "redirect:list";
 	}
@@ -74,8 +74,8 @@ public class BControlloer {
 		System.out.println(">>>>>>>content_view()");
 		
 		model.addAttribute("request", httpServletRequest);
-		command = new BContentService();
-		command.execute(model);
+		service = new BContentService();
+		service.execute(model);
 		
 		return "board/content_view";
 	}
@@ -85,8 +85,8 @@ public class BControlloer {
 		System.out.println(">>>>>>>modify()");
 		
 		model.addAttribute("request", httpServletRequest);
-		command = new BModifyService();
-		command.execute(model);
+		service = new BModifyService();
+		service.execute(model);
 		
 		return "redirect:list";
 	}
@@ -96,8 +96,8 @@ public class BControlloer {
 		System.out.println(">>>>>>>reply_view()");
 		
 		model.addAttribute("request", httpServletRequest);
-		command = new BReplyViewService();
-		command.execute(model);
+		service = new BReplyViewService();
+		service.execute(model);
 		
 		return "board/reply_view";
 	}
@@ -108,8 +108,8 @@ public class BControlloer {
 		
 		model.addAttribute("request", httpServletRequest);
 		
-		command = new BReplyService();
-		command.execute(model);
+		service = new BReplyService();
+		service.execute(model);
 		
 		return "redirect:list";
 	}
@@ -120,8 +120,8 @@ public class BControlloer {
 		
 		model.addAttribute("request", httpServletRequest);
 		
-		command = new BDeleteService();
-		command.execute(model);
+		service = new BDeleteService();
+		service.execute(model);
 		
 		return "redirect:list";
 	}
