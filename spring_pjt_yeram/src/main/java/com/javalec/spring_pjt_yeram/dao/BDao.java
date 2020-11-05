@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -21,13 +22,18 @@ public class BDao {
 	DataSource dataSource;
 	JdbcTemplate template = null;;
 
+	@Autowired
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+	}
+
 	public BDao() {
 		template = Constant.template;
 	}
 
 	// **************************************** 글 목록 조회
 	public ArrayList<BDto> list() {
-		String query = "select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from boardDB order by bGroup desc, bStep asc";
+		String query = "select * from boardDB order by bGroup desc, bStep asc";
 		return (ArrayList<BDto>) template.query(query, new BeanPropertyRowMapper<BDto>(BDto.class));
 	}
 

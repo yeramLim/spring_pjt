@@ -9,7 +9,8 @@
 
 	<!-- 보안을 설정함 -> 특정 페이지에 따라 intercept 설정 -->
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/login.html*" access="ROLE_USER"/>
+		<security:form-login login-page="/loginForm.html" authentication-failure-url="/loginForm.html?ng"/>
+		<security:intercept-url pattern="/login.html" access="ROLE_USER"/>
 		<security:intercept-url pattern="/welcome.html*" access="ROLE_ADMIN"/>
 	</security:http>
 	 

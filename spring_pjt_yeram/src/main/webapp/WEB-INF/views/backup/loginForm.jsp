@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html lang="en">
   <head>
@@ -12,11 +12,11 @@
     <title>free login form -bootstrap</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- font awesome -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Style -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,15 +33,15 @@
         </div>
         <div class="col-md-3">
           <div class="login-box well">
-        <form accept-charset="UTF-8" role="form" method="post" action="${pageContext.request.contextPath}/member/login_ok">
+        <form accept-charset="UTF-8" role="form" method="post" action="<c:url value="j_spring_security_check"/>">
             <legend>login</legend>
             <div class="form-group">
                 <label for="username-email">이메일</label>
-                <input name="userEmail" value='' id="username-email" placeholder="E-mail" type="text" class="form-control" />
+                <input name="j_username" value='' id="username-email" placeholder="E-mail" type="text" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="userPassword">비밀번호</label>
-                <input name="password" id="password" value='' placeholder="Password" type="password" class="form-control" />
+                <input name="j_password" id="password" value='' placeholder="Password" type="password" class="form-control" />
             </div>
             <div class="form-group">
                 <label>
@@ -65,6 +65,6 @@
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
   </body>
   </html>

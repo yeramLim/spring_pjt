@@ -14,7 +14,6 @@
 			/WEB-INF/spring/root-context.xml
 			/WEB-INF/spring/appServlet/security-context.xml
 			/WEB-INF/spring/appServlet/servlet-context.xml
-			
 		</param-value> <!-- 설정 파일 추가해줌 -->
 		
 	</context-param>
@@ -54,7 +53,7 @@
 
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<!-- 한글처리 -->

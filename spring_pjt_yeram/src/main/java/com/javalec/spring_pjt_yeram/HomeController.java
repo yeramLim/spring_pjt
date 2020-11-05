@@ -22,7 +22,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/index.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -43,6 +43,10 @@ public class HomeController {
 	@RequestMapping("/welcome.html")
 	public String welcome(Locale locale, Model model) {
 		return "security/welcome";
+	}
+	@RequestMapping("/loginForm.html")
+	public String loginForm(Locale locale, Model model) {
+		return "security/loginForm";
 	}
 	
 
