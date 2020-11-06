@@ -9,30 +9,30 @@
 <body>
 	<form action="reply" method="post">
 		<table width="500" cellpadding="0" cellspacing="0" border="1">
-			<input type="hidden" name="bId" value="${reply_view.bId }">
-			<input type="hidden" name="bGroup" value="${reply_view.bGroup }">
-			<input type="hidden" name="bStep" value="${reply_view.bStep }">
-			<input type="hidden" name="bIndent" value="${reply_view.bIndent }">
+			<input type="hidden" name="bId" value="${replyView.bId }">
+			<input type="hidden" name="bGroup" value="${replyView.bGroup }">
+			<input type="hidden" name="bStep" value="${replyView.bStep }">
+			<input type="hidden" name="bIndent" value="${replyView.bIndent }">
 
 			<tr>
 				<td>번호</td>
-				<td>${reply_view.bId }</td>
+				<td>${replyView.bId }</td>
 			</tr>
 			<tr>
 				<td>히트</td>
-				<td>${reply_view.bHit }</td>
+				<td>${replyView.bHit }</td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="bName" value="${reply_view.bName }"></td>
+				<td><input type="text" name="bName" value="${replyView.bName }"></td>
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="bTitle" value="[RE] ${reply_view.bTitle }"></td>
+				<td><input type="text" name="bTitle" value="[RE] ${replyView.bTitle }"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><input type="text" name="bContent" value="${reply_view.bContent }"></td>
+				<td><input type="text" name="bContent" value="${replyView.bContent }"></td>
 			</tr>
 			<tr>
 				<td colspan="2">

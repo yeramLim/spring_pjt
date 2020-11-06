@@ -15,13 +15,13 @@ public class BModifyService implements BService {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
-		String bId = request.getParameter("bId");
+		int bId = Integer.parseInt(request.getParameter("bId"));
 		String bName = request.getParameter("bName");
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent");
 		
 		BDao dao = new BDao();
-		dao.modify(bId, bName, bTitle, bContent);
+		dao.modify( bName, bTitle, bContent, bId);
 		
 	}
 

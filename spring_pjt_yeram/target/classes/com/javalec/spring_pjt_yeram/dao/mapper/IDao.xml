@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.javalec.spring_pjt_yeram.dao.IDao">
+	<select id="list"
+		resultType="com.javalec.spring_pjt_yeram.dto.BDto">
+		SELECT * FROM BOARDDB ORDER BY BGROUP
+		DESC, BSTEP ASC
+	</select>
+
+	<update id="upHit">
+		UPDATE BOARDDB SET BHIT
+		= BHIT + 1 WHERE BID = #{param1}
+	</update>
+
+
+	<select id="contentView"
+		resultType="com.javalec.spring_pjt_yeram.dto.BDto">
+		SELECT * FROM BOARDDB WHERE BID =
+		#{param1}
+	</select>
+
+	<insert id="write">
+		INSERT INTO BOARDDB (BID,
+		BNAME, BTITLE, BCONTENT, BHIT, BGROUP, BSTEP,
+		BINDENT) VALUES (BOARDDB_SEQ.NEXTVAL, #{param1},
+		#{param2}, #{param3},
+		0, BOARDDB_SEQ.CURRVAL, 0,
+		0)
+	</insert>
+
+	<select id="replyView"
+		resultType="com.javalec.spring_pjt_yeram.dto.BDto">
+		SELECT * FROM BOARDDB WHERE BID =
+		#{param1}
+	</select>
+
+	<insert id="reply">
+		insert into boardDB (bId, bName, bTitle, bContent, bGroup, bStep, bIndent)
+		VALUES (boardDB_seq.nextval, #{param1},
+		#{param2}, #{param3}, #{param4},
+		#{param5}, #{param6})
+	</insert>
+
+	<update id="replyShape">
+		update boardDB set bStep =
+		bStep + 1 where bGroup = #{param1} and bStep >
+		#{param2}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM BOARDDB WHERE BID =
+		#{param1}
+	</delete>
+
+	<update id="modify">
+		update boardDB set bName =
+		#{param1}, bTitle = #{param2}, bContent =
+		#{param3} where bId = #{param4}
+	</update>
+</mapper>

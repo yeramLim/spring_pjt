@@ -18,9 +18,9 @@ public class BReplyViewService implements BService {
 		
 		String bId = request.getParameter("bId");
 		BDao dao = new BDao();
-		BDto dto = dao.reply_view(bId);
+		BDto dto = dao.replyView(bId);
 		
-		model.addAttribute("reply_view", dto);
+		model.addAttribute("replyView", dto);
 	}
 
 }
