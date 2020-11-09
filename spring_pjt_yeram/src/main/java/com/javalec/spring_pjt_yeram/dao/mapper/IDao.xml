@@ -2,7 +2,7 @@
 <!DOCTYPE mapper 
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!-- 데이터베이스 -->
 <mapper
 	namespace="com.javalec.spring_pjt_yeram.dao.IDao">
 	<select id="list"
