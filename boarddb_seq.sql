@@ -2,7 +2,7 @@
 --  파일이 생성됨 - 월요일-11월-09-2020   
 --------------------------------------------------------
 --------------------------------------------------------
---  DDL for Sequence BOARDDB_SEQ
+--  DDL for Sequence SEQ_BOARD
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "SCOTT"."BOARDDB_SEQ"  MINVALUE 0 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "SCOTT"."SEQ_BOARD"  MINVALUE 0 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
