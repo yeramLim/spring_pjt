@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  파일이 생성됨 - 수요일-10월-28-2020   
+--  파일이 생성됨 - 월요일-11월-09-2020   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Table BOARDDB
@@ -22,13 +22,15 @@
   TABLESPACE "USERS" ;
 REM INSERTING into SCOTT.BOARDDB
 SET DEFINE OFF;
-Insert into SCOTT.BOARDDB (BID,BNAME,BTITLE,BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT) values (2,'안녕','하이','하이',to_date('20/10/28','RR/MM/DD'),0,2,0,0);
-Insert into SCOTT.BOARDDB (BID,BNAME,BTITLE,BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT) values (3,'뭐지','ㅇㅇ','ㅇㅇ',to_date('20/10/28','RR/MM/DD'),0,3,0,0);
+Insert into SCOTT.BOARDDB (BID,BNAME,BTITLE,BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT) values (5,'zzzz','zzz','zzzz',to_date('20/11/06','RR/MM/DD'),7,5,0,0);
+Insert into SCOTT.BOARDDB (BID,BNAME,BTITLE,BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT) values (3,'ㅋㅋggg','[RE] ㅋㅋ','ㅋㅋ',to_date('20/11/05','RR/MM/DD'),1,2,1,1);
+Insert into SCOTT.BOARDDB (BID,BNAME,BTITLE,BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT) values (2,'ㅋㅋ','ㅋㅋggg','ㅋㅋ',to_date('20/11/05','RR/MM/DD'),4,2,0,0);
+Insert into SCOTT.BOARDDB (BID,BNAME,BTITLE,BCONTENT,BDATE,BHIT,BGROUP,BSTEP,BINDENT) values (4,'안녕','ㅎㅎ','ㅎㅎ',to_date('20/11/06','RR/MM/DD'),5,4,0,0);
 --------------------------------------------------------
---  DDL for Index SYS_C0011228
+--  DDL for Index SYS_C0011229
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX "SCOTT"."SYS_C0011228" ON "SCOTT"."BOARDDB" ("BID") 
+  CREATE UNIQUE INDEX "SCOTT"."SYS_C0011229" ON "SCOTT"."BOARDDB" ("BID") 
   PCTFREE 10 INITRANS 2 MAXTRANS 255 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
