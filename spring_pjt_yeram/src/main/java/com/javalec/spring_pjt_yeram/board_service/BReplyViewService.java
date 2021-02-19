@@ -17,10 +17,12 @@ public class BReplyViewService implements BService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		String bId = request.getParameter("bId");
+		
 		BDao dao = new BDao();
 		BDto dto = dao.replyView(bId);
-		
 		model.addAttribute("replyView", dto);
 	}
+	
+	
 
 }
